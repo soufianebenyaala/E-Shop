@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "977827779090",
+    "project_id": "e-shop-edf51",
+    "storage_bucket": "e-shop-edf51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977827779090:android:7529161fb9c474e63c3ecb",
+        "android_client_info": {
+          "package_name": "com.mlk.e_shop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8w1LzUFBuculQnTh6gTXO31vR76J-8p0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

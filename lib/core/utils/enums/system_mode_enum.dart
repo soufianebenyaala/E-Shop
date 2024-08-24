@@ -1,0 +1,4 @@
+enum SystemModeEnums {
+  light,
+  dark;
+}
