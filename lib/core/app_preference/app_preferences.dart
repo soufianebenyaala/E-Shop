@@ -83,16 +83,6 @@ class AppPreferences implements AppPreferencesHelper {
     }
   }
 
-  @override
-  bool isLoggedIn() {
-    return _sharedPreferences.getBool(prefKeyIsLoggedIn) ?? false;
-  }
-
-  @override
-  setLoggedIn(bool isLoggedIn) {
-    _sharedPreferences.setBool(prefKeyIsLoggedIn, isLoggedIn);
-  }
-
   static const prefKeyAppSystemMode = "PREF_KEY_APP_SYSTEM_MODE";
   static const prefKeyAppLoginEmail = "PREF_KEY_APP_LOGIN_EMAIL";
   static const prefKeyAppLoginPwd = "PREF_KEY_APP_LOGIN_PWD";

@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-import 'package:e_shop/core/app_preference/app_preferences.dart';
 import 'package:e_shop/core/services/http_service.dart';
 import 'package:e_shop/features/cart/data/models/cart_model.dart';
 import 'package:e_shop/features/cart/data/models/cart_product_model.dart';

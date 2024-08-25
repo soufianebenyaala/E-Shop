@@ -27,4 +27,11 @@ class LoginLoadedState extends AuthState {
   });
 }
 
+class SignUpLoadedState extends AuthState {
+  final UserCredential userCredential;
+  const SignUpLoadedState({
+    required this.userCredential,
+  });
+}
+
 class LogoutLoadedState extends AuthState {}

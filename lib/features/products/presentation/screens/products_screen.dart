@@ -1,14 +1,10 @@
 import 'package:e_shop/core/Routes/app_route.dart';
-import 'package:e_shop/core/app_preference/app_preferences.dart';
 import 'package:e_shop/core/constants/contants.dart';
 import 'package:e_shop/core/widgets/global_text_form_field_widget.dart';
 import 'package:e_shop/features/auth/presentation/blocs/bloc/auth_bloc.dart';
 import 'package:e_shop/features/products/presentation/blocs/bloc/products_bloc.dart';
 import 'package:e_shop/features/products/presentation/widgets/products_body_widget.dart';
-import 'package:e_shop/injection_container.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -26,6 +22,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text('E SHOP'),
         actions: [
           IconButton(
             onPressed: () async {
@@ -37,7 +34,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 AppRouteName.cartScreen,
               );
             },
-            icon: Icon(
+            icon: const Icon(
               FontAwesomeIcons.cartShopping,
             ),
           ),
@@ -52,7 +49,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 (route) => false,
               );
             },
-            icon: Icon(FontAwesomeIcons.doorOpen),
+            icon: const Icon(FontAwesomeIcons.doorOpen),
           )
         ],
       ),

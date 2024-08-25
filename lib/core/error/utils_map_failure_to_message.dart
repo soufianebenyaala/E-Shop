@@ -15,6 +15,10 @@ abstract class UtilsMapFailureToMessage {
         return Constants.SERVER_FAILURE_MESSAGE;
       case InvalidCredentialFailure _:
         return Constants.INVALID_CREDENTIAL_FAILURE_MESSAGE;
+      case WeekPasswordFailure _:
+        return Constants.WEAK_PASSWORD_FAILURE_MESSAGE;
+      case EmailAlreadyInFailure _:
+        return Constants.EMAIL_FAILURE_MESSAGE;
       case OfflineFailure _:
         return Constants.OFFLINE_FAILURE_MESSAGE;
 

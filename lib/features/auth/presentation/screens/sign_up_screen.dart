@@ -1,30 +1,24 @@
 import 'package:e_shop/core/Routes/app_route.dart';
-import 'package:e_shop/core/app_preference/app_preferences.dart';
 import 'package:e_shop/core/assets.dart';
 import 'package:e_shop/core/utils/overlay_message_util.dart';
 import 'package:e_shop/features/auth/presentation/blocs/bloc/auth_bloc.dart';
-import 'package:e_shop/features/auth/presentation/widgets/login_form_widget.dart';
-import 'package:e_shop/injection_container.dart';
+import 'package:e_shop/features/auth/presentation/widgets/sign_up_form_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
-        if (state is LoginLoadedState) {
-          if (state.loginParams.saveCredentials) {
-            di.get<AppPreferences>().setLoginEmail(state.loginParams.email);
-            di.get<AppPreferences>().setLoginPwd(state.loginParams.password);
-          }
-          OverlayMessageUtil.showSuccessOverlayMessage('Login successfully !');
+      listener: (context, state) async {
+        if (state is SignUpLoadedState) {
+          OverlayMessageUtil.showSuccessOverlayMessage('SignUp successfully !');
           Navigator.pushNamedAndRemoveUntil(
             context,
-            AppRouteName.productsScreen,
+            AppRouteName.loginScreen,
             (route) => false,
           );
         }
@@ -58,7 +52,7 @@ class LoginScreen extends StatelessWidget {
 
                 /// Welcoming Text
                 Text(
-                  'Let’s Sign in !',
+                  'Let’s Sign Up !',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w600,
                         fontFamily: 'Lato',
@@ -67,9 +61,9 @@ class LoginScreen extends StatelessWidget {
                       ),
                 ),
 
-                ///  Login Text
+                ///  SignUp Text
                 Text(
-                  'Login To Your Account',
+                  'Sign Up To Your Account',
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         fontFamily: 'Lato',
                         color: Colors.grey,
@@ -78,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const LoginFormWidget(),
+                const SignUpFormWidget(),
                 const SizedBox(
                   height: 5,
                 ),
@@ -86,18 +80,18 @@ class LoginScreen extends StatelessWidget {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Don’t have an account ?',
+                        text: 'Already have an account ?',
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       TextSpan(
-                        text: ' Sign Up',
+                        text: ' Sign In',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: Theme.of(context).colorScheme.primary,
                             ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () => Navigator.pushNamedAndRemoveUntil(
                                 context,
-                                AppRouteName.signUpScreen,
+                                AppRouteName.loginScreen,
                                 (route) => false,
                               ),
                       ),

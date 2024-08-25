@@ -1,5 +1,4 @@
 import 'package:e_shop/core/error/utils_map_failure_to_message.dart';
-import 'package:e_shop/core/use_cases/use_case.dart';
 import 'package:e_shop/features/product_details/domain/usecase/get_product_details_use_case.dart';
 import 'package:e_shop/features/products/data/models/product_model.dart';
 import 'package:equatable/equatable.dart';

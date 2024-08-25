@@ -3,7 +3,6 @@ import 'package:e_shop/core/utils/utils.dart';
 import 'package:e_shop/core/widgets/new_product_widget.dart';
 import 'package:e_shop/features/product_details/presentation/widgets/review_widget.dart';
 import 'package:e_shop/features/products/data/models/product_model.dart';
-import 'package:e_shop/features/products/data/models/review_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -50,20 +49,20 @@ class ProductDetailsWidget extends StatelessWidget {
                   product: product,
                 ),
                 Text(
-                  product.title ?? '',
+                  product.title,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Row(
                   children: [
                     Text(
-                      '${Utils.calculatePriceAfterDiscount(product.price!, product.discountPercentage!)} TND',
+                      '${Utils.calculatePriceAfterDiscount(product.price, product.discountPercentage!)} TND',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(
                       width: 5,
                     ),
                     Text(
-                      '${product.price ?? ''} TND',
+                      '${product.price} TND',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: Theme.of(context)
                                 .colorScheme
@@ -126,18 +125,18 @@ class ProductDetailsWidget extends StatelessWidget {
                 ),
                 Text(product.description ?? ''),
                 ListTile(
-                  leading: Icon(FontAwesomeIcons.boxesStacked),
-                  title: Text('Minimum Order Quantity'),
+                  leading: const Icon(FontAwesomeIcons.boxesStacked),
+                  title: const Text('Minimum Order Quantity'),
                   subtitle: Text('${product.minimumOrderQuantity}'),
                 ),
                 ListTile(
-                  leading: Icon(FontAwesomeIcons.fileShield),
-                  title: Text('Return Policy'),
+                  leading: const Icon(FontAwesomeIcons.fileShield),
+                  title: const Text('Return Policy'),
                   subtitle: Text('${product.returnPolicy}'),
                 ),
                 ListTile(
-                  leading: Icon(FontAwesomeIcons.truckFast),
-                  title: Text('Shipping Information'),
+                  leading: const Icon(FontAwesomeIcons.truckFast),
+                  title: const Text('Shipping Information'),
                   subtitle: Text('${product.shippingInformation}'),
                 ),
                 if (product.reviews.isNotEmpty)
@@ -148,7 +147,7 @@ class ProductDetailsWidget extends StatelessWidget {
                         ),
                   ),
                 ListView.separated(
-                  separatorBuilder: (context, index) => Divider(),
+                  separatorBuilder: (context, index) => const Divider(),
                   itemCount: product.reviews.length,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,

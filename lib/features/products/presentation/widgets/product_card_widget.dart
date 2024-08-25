@@ -103,7 +103,7 @@ class ProductCardWidget extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Text('Buy'),
+                          child: const Text('Buy'),
                         ),
                       ),
                     ],

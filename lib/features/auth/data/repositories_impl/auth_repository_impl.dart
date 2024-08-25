@@ -4,6 +4,7 @@ import 'package:e_shop/core/error/server_exception.dart';
 import 'package:e_shop/features/auth/data/datasource/auth_remote_data_source.dart';
 import 'package:e_shop/features/auth/domain/repositories/auth_repository.dart';
 import 'package:e_shop/features/auth/domain/usecase/login_use_case.dart';
+import 'package:e_shop/features/auth/domain/usecase/sign_up_use_case.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -32,6 +33,22 @@ class AuthRepositoryImpl implements AuthRepository {
       return Right(response);
     } on FirebaseAuthException {
       return Left(FirebaseAuthFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserCredential>> signUp(
+      {required SignUpParams signUpParams}) async {
+    try {
+      final response =
+          await authRemoteDataSource.signUp(signUpParams: signUpParams);
+      return Right(response);
+    } on FirebaseAuthException {
+      return Left(FirebaseAuthFailure());
+    } on WeekPasswordException {
+      return Left(WeekPasswordFailure());
+    } on EmailAlreadyInException {
+      return Left(EmailAlreadyInFailure());
     }
   }
 }

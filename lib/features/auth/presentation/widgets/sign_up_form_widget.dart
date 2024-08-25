@@ -1,35 +1,34 @@
-import 'package:e_shop/core/app_preference/app_preferences.dart';
 import 'package:e_shop/core/utils/validations_utils.dart';
 import 'package:e_shop/core/widgets/global_text_form_field_widget.dart';
-import 'package:e_shop/features/auth/domain/usecase/login_use_case.dart';
+import 'package:e_shop/features/auth/domain/usecase/sign_up_use_case.dart';
 import 'package:e_shop/features/auth/presentation/blocs/bloc/auth_bloc.dart';
-import 'package:e_shop/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class LoginFormWidget extends StatefulWidget {
-  const LoginFormWidget({super.key});
+class SignUpFormWidget extends StatefulWidget {
+  const SignUpFormWidget({super.key});
 
   @override
-  State<LoginFormWidget> createState() => _LoginFormWidgetState();
+  State<SignUpFormWidget> createState() => _SignUpFormWidgetState();
 }
 
-class _LoginFormWidgetState extends State<LoginFormWidget> {
-  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+class _SignUpFormWidgetState extends State<SignUpFormWidget> {
+  final GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
   final TextEditingController emailTEC = TextEditingController();
   final TextEditingController passwordTEC = TextEditingController();
+  final TextEditingController displayNameTEC = TextEditingController();
   bool isSaveCredentials = true;
 
   bool isPwdTxtObscure = true;
-  void loginHandler() {
-    if (loginFormKey.currentState!.validate() == true) {
+  void signUpHandler() {
+    if (signUpFormKey.currentState!.validate() == true) {
       BlocProvider.of<AuthBloc>(context).add(
-        LoginEvent(
-          loginParams: LoginParams(
+        SignUpEvent(
+          signUpParams: SignUpParams(
             email: emailTEC.text,
             password: passwordTEC.text,
-            saveCredentials: isSaveCredentials,
+            displayName: displayNameTEC.text,
           ),
         ),
       );
@@ -37,33 +36,9 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    initRememberCredentialsLogic();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  initRememberCredentialsLogic() {
-    emailTEC.text = di.get<AppPreferences>().getLoginEmail();
-    passwordTEC.text = di.get<AppPreferences>().getLoginPwd();
-
-    if (emailTEC.text.isNotEmpty && passwordTEC.text.isNotEmpty) {
-      emailTEC.selection = TextSelection.fromPosition(
-          TextPosition(offset: emailTEC.text.length));
-      passwordTEC.selection = TextSelection.fromPosition(
-          TextPosition(offset: passwordTEC.text.length));
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-
     return Form(
-      key: loginFormKey,
+      key: signUpFormKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -72,13 +47,13 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
             validator: ValidationsUtils.isValidEmailAndRequired,
             controller: emailTEC,
             hintText: 'Enter your email',
-            labelText: 'email',
+            labelText: 'Email',
             prefixIcon: const Icon(
               FontAwesomeIcons.userLarge,
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 10,
           ),
 
           /// Password Section
@@ -115,45 +90,22 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
             height: 10,
           ),
 
-          /// Remember me section
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SizedBox(
-                    height: 24.0,
-                    width: 24.0,
-                    child: Checkbox(
-                      side: BorderSide(
-                        color: Theme.of(context).colorScheme.primary,
-                        width: 1.5,
-                      ),
-                      activeColor: Theme.of(context).colorScheme.primary,
-                      value: isSaveCredentials,
-                      onChanged: (newValue) {
-                        setState(() {
-                          isSaveCredentials = !isSaveCredentials;
-                        });
-                      },
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 4.0),
-                    child: Text(
-                      "Remember me",
-                    ),
-                  ),
-                ],
-              ),
-            ],
+          /// Authentication TextFields
+          GlobalTextFormFieldWidget(
+            validator: ValidationsUtils.isRequired,
+            controller: displayNameTEC,
+            hintText: 'Enter your Name',
+            labelText: 'Name',
+            prefixIcon: const Icon(
+              FontAwesomeIcons.person,
+            ),
           ),
 
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
           ),
 
-          /// Login Button
+          /// SignUp Button
           Row(
             children: [
               Expanded(
@@ -173,9 +125,9 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                     ),
                   ),
                   child: TextButton(
-                    onPressed: loginHandler,
+                    onPressed: signUpHandler,
                     child: Text(
-                      "Sign in",
+                      "Sign Up",
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium

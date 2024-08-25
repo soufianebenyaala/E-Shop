@@ -22,7 +22,7 @@ class NewProductWidget extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
+              borderRadius: const BorderRadius.all(Radius.circular(5)),
               color: Theme.of(context).colorScheme.primaryContainer,
             ),
             child: Text(

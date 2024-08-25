@@ -9,7 +9,7 @@ class AppTheme {
     tabBarTheme: TabBarTheme(
       indicatorSize: TabBarIndicatorSize.tab,
       dividerHeight: 0.2,
-      labelStyle: TextStyle(
+      labelStyle: const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w700,
       ),
@@ -21,14 +21,14 @@ class AppTheme {
       isDense: true,
       filled: true,
       alignLabelWithHint: true,
-      contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
       floatingLabelBehavior: FloatingLabelBehavior.auto,
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
         borderSide: BorderSide(width: 1.0, color: AppColor.lightScheme().error),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
         borderSide: BorderSide(width: 1.0, color: AppColor.lightScheme().error),
       ),
       focusedBorder: const OutlineInputBorder(
@@ -44,7 +44,7 @@ class AppTheme {
         borderSide: BorderSide(width: 0.5),
       ),
     ),
-    cardTheme: CardTheme(
+    cardTheme: const CardTheme(
       elevation: 5,
       surfaceTintColor: Colors.white,
     ),
@@ -57,7 +57,7 @@ class AppTheme {
     tabBarTheme: TabBarTheme(
       indicatorSize: TabBarIndicatorSize.tab,
       dividerHeight: 0.2,
-      labelStyle: TextStyle(
+      labelStyle: const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w700,
       ),
@@ -69,10 +69,10 @@ class AppTheme {
       isDense: true,
       filled: true,
       alignLabelWithHint: true,
-      contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
       floatingLabelBehavior: FloatingLabelBehavior.auto,
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
         borderSide: BorderSide(width: 1.0, color: AppColor.darkScheme().error),
       ),
       focusedBorder: const OutlineInputBorder(
@@ -80,7 +80,7 @@ class AppTheme {
         borderSide: BorderSide(width: 1.0),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
         borderSide: BorderSide(width: 1.0, color: AppColor.darkScheme().error),
       ),
       enabledBorder: const OutlineInputBorder(
@@ -92,7 +92,7 @@ class AppTheme {
         borderSide: BorderSide(width: 0.5),
       ),
     ),
-    cardTheme: CardTheme(
+    cardTheme: const CardTheme(
       elevation: 5,
     ),
   );

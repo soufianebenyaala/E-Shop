@@ -2,10 +2,8 @@
 
 import 'package:e_shop/core/widgets/widgets_show_error_or_loading/content_not_found_widget.dart';
 import 'package:e_shop/features/products/data/models/product_model.dart';
-import 'package:e_shop/features/products/presentation/blocs/bloc/products_bloc.dart';
 import 'package:e_shop/features/products/presentation/widgets/product_card_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListOfProductWidget extends StatelessWidget {
   final List<ProductModel> products;
@@ -30,7 +28,7 @@ class ListOfProductWidget extends StatelessWidget {
         child: products.isNotEmpty
             ? GridView.builder(
                 itemCount: products.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 0.55,
                 ),

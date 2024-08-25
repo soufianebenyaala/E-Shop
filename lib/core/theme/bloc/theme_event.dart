@@ -10,7 +10,7 @@ sealed class ThemeEvent extends Equatable {
 
 class ChangeToDarkThemeEvent extends ThemeEvent {
   final SystemModeEnums systemMode;
-  ChangeToDarkThemeEvent({
+  const ChangeToDarkThemeEvent({
     required this.systemMode,
   });
 }

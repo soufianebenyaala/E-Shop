@@ -50,9 +50,37 @@ class InvalidCredentialException implements Exception {
         name = exceptionType.name;
 }
 
+class EmailAlreadyInException implements Exception {
+  final String name, message;
+  final int? statusCode;
+  final ServerExceptionType exceptionType;
+
+  EmailAlreadyInException({
+    required this.message,
+    this.exceptionType = ServerExceptionType.emailAlreadyInException,
+    int? statusCode,
+  })  : statusCode = statusCode ?? 409,
+        name = exceptionType.name;
+}
+
+class WeekPasswordException implements Exception {
+  final String name, message;
+  final int? statusCode;
+  final ServerExceptionType exceptionType;
+
+  WeekPasswordException({
+    required this.message,
+    this.exceptionType = ServerExceptionType.weekPasswordException,
+    int? statusCode,
+  })  : statusCode = statusCode ?? 409,
+        name = exceptionType.name;
+}
+
 enum ServerExceptionType {
   incorrectCurrentPasswordError,
   unchangePasswordError,
   unexpectedError,
   invalidCredential,
+  weekPasswordException,
+  emailAlreadyInException,
 }

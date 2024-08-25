@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:e_shop/core/widgets/widgets_show_error_or_loading/error_message_widget.dart';
 import 'package:e_shop/core/widgets/widgets_show_error_or_loading/loading_data_widget.dart';
-import 'package:e_shop/features/products/data/models/product_model.dart';
 import 'package:e_shop/features/products/presentation/blocs/bloc/products_bloc.dart';
 
 class ProductsBodyWidget extends StatelessWidget {
@@ -16,7 +15,6 @@ class ProductsBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductsBloc, ProductsState>(
       builder: (context, state) {
-        print(state);
         if (state is GetProductsLoadingState) {
           return const LoadingDataWidget();
         }

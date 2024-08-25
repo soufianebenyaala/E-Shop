@@ -88,7 +88,7 @@ class _CartProductCardWidgetState extends State<CartProductCardWidget> {
                       );
                     }
                   },
-                  icon: Icon(FontAwesomeIcons.minus),
+                  icon: const Icon(FontAwesomeIcons.minus),
                 ),
                 Text('${widget.cartProduct.quantity}'),
                 IconButton.filled(
@@ -104,7 +104,7 @@ class _CartProductCardWidgetState extends State<CartProductCardWidget> {
                       ),
                     );
                   },
-                  icon: Icon(FontAwesomeIcons.plus),
+                  icon: const Icon(FontAwesomeIcons.plus),
                 ),
               ],
             )

@@ -1,8 +1,7 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:e_shop/core/error/utils_map_failure_to_message.dart';
 import 'package:e_shop/core/use_cases/use_case.dart';
 import 'package:e_shop/features/cart/data/models/cart_model.dart';
-import 'package:e_shop/features/cart/data/models/cart_product_model.dart';
 import 'package:e_shop/features/cart/domain/usecase/delete_cart_use_case.dart';
 import 'package:e_shop/features/cart/domain/usecase/update_product_quantity_in_cart_params_cart_use_case.dart';
 import 'package:e_shop/features/cart/domain/usecase/save_product_to_cart_use_case.dart';

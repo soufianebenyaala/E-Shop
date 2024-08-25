@@ -15,3 +15,10 @@ class LoginEvent extends AuthEvent {
 }
 
 class LogoutEvent extends AuthEvent {}
+
+class SignUpEvent extends AuthEvent {
+  final SignUpParams signUpParams;
+  const SignUpEvent({
+    required this.signUpParams,
+  });
+}

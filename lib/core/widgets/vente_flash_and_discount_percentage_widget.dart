@@ -15,10 +15,10 @@ class VenteFlashAndDiscountPercentageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        if (product.price != null && product.price! < 10)
+        if (product.price< 10)
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
+              borderRadius: const BorderRadius.all(Radius.circular(5)),
               color: Theme.of(context).colorScheme.secondaryContainer,
             ),
             padding: const EdgeInsets.all(5),
@@ -29,10 +29,10 @@ class VenteFlashAndDiscountPercentageWidget extends StatelessWidget {
                   ),
             ),
           )
-        else if (product.price != null && product.price! < 50)
+        else if (product.price< 50)
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
+              borderRadius: const BorderRadius.all(Radius.circular(5)),
               color: Theme.of(context).colorScheme.tertiaryContainer,
             ),
             padding: const EdgeInsets.all(5),

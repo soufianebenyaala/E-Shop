@@ -28,9 +28,9 @@ class FirebaseAuthFailure extends Failure {}
 
 class InvalidCredentialFailure extends Failure {}
 
-class UnchangePasswordFailure extends Failure {}
+class EmailAlreadyInFailure extends Failure {}
 
-class IncorrectCurrentPasswordFailure extends Failure {}
+class WeekPasswordFailure extends Failure {}
 
 class LockedAccountFailure extends Failure {}
 

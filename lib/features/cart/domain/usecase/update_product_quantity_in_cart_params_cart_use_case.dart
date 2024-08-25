@@ -4,7 +4,6 @@ import 'package:e_shop/core/use_cases/use_case.dart';
 import 'package:e_shop/features/cart/data/models/cart_model.dart';
 import 'package:e_shop/features/cart/data/models/cart_product_model.dart';
 import 'package:e_shop/features/cart/domain/repositories/cart_repository.dart';
-import 'package:e_shop/features/products/data/models/product_model.dart';
 
 class UpdateProductQuantityInCartUseCase
     implements UseCase<CartModel, UpdateProductQuantityInCartParams> {
