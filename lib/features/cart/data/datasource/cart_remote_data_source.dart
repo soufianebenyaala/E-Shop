@@ -33,7 +33,6 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
     try {
       final box = await Hive.openBox<CartModel>("cart");
       CartModel? cart = box.get("cart");
-      print(cart?.products);
       return cart;
     } catch (e) {
       rethrow;

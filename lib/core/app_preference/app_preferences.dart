@@ -65,20 +65,6 @@ class AppPreferences implements AppPreferencesHelper {
   }
 
   @override
-  String getUid() {
-    return _sharedPreferences.getString(prefKeyUid) ?? '';
-  }
-
-  @override
-  setUid(String? uid) {
-    if (uid != null) {
-      _sharedPreferences.setString(prefKeyUid, uid);
-    } else {
-      _sharedPreferences.remove(prefKeyUid);
-    }
-  }
-
-  @override
   CartModel? getCart() {
     CartModel? cart;
     if (_sharedPreferences.getString(prefKeyCartData) != null) {

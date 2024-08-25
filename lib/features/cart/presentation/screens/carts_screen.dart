@@ -1,4 +1,3 @@
-import 'package:e_shop/core/Routes/app_route.dart';
 import 'package:e_shop/core/constants/contants.dart';
 import 'package:e_shop/features/auth/presentation/blocs/bloc/auth_bloc.dart';
 import 'package:e_shop/features/cart/presentation/blocs/get_cart/get_cart_bloc.dart';
