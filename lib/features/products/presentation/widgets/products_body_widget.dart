@@ -9,12 +9,14 @@ import 'package:e_shop/features/products/data/models/product_model.dart';
 import 'package:e_shop/features/products/presentation/blocs/bloc/products_bloc.dart';
 
 class ProductsBodyWidget extends StatelessWidget {
-  const ProductsBodyWidget({super.key});
+  final VoidCallback applyResetFilters;
+  const ProductsBodyWidget({super.key, required this.applyResetFilters});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductsBloc, ProductsState>(
       builder: (context, state) {
+        print(state);
         if (state is GetProductsLoadingState) {
           return const LoadingDataWidget();
         }
@@ -25,9 +27,13 @@ class ProductsBodyWidget extends StatelessWidget {
         }
         if (state is GetProductsLoadedState) {
           return ListOfProductWidget(
-            getItems: () => BlocProvider.of<ProductsBloc>(context).add(
-              GetProductsEvent(),
-            ),
+            applyResetFilters: applyResetFilters,
+            getItems: () {
+              BlocProvider.of<ProductsBloc>(context).add(
+                GetProductsEvent(),
+              );
+              applyResetFilters();
+            },
             products: state.productsModel.products,
           );
         }

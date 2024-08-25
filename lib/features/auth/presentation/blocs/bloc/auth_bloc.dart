@@ -35,6 +35,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
       if (event is LogoutEvent) {
         emit(AuthLoadingState());
+        
         final failureOrlogout = await logoutUseCase(NoParams());
         emit(
           failureOrlogout.fold(

@@ -5,4 +5,5 @@ abstract class AppRouteName {
   static const String loginScreen = "/loginScreen";
   static const String productsScreen = "/productsScreen";
   static const String productDetailsScreen = "/productDetailsScreen";
+  static const String cartScreen = "/cartScreen";
 }

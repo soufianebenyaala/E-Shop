@@ -10,6 +10,12 @@ part 'products_state.dart';
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final GetProductsUseCase getProductsUseCase;
+  ProductsModel _originalProducts = ProductsModel(
+    products: [],
+    total: 0,
+    skip: 0,
+    limit: 0,
+  );
   ProductsBloc({required this.getProductsUseCase}) : super(ProductsInitial()) {
     on<ProductsEvent>((event, emit) async {
       if (event is GetProductsEvent) {
@@ -17,10 +23,37 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
         final failureOrGetDealss = await getProductsUseCase(NoParams());
         emit(
           failureOrGetDealss.fold(
-            (failure) => GetProductsErrorState(
-                message: UtilsMapFailureToMessage.mapFailureToMessage(failure)),
-            (productsModel) => GetProductsLoadedState(
+              (failure) => GetProductsErrorState(
+                  message:
+                      UtilsMapFailureToMessage.mapFailureToMessage(failure)),
+              (productsModel) {
+            _originalProducts = productsModel;
+            return GetProductsLoadedState(
               productsModel: productsModel,
+            );
+          }),
+        );
+      }
+      if (event is FilterProductsEvent) {
+        emit(GetProductsLoadingState());
+        final filteredProducts = _originalProducts.products.where((product) {
+          final matchesName = event.nameFilter == null ||
+              product.title
+                  .toLowerCase()
+                  .contains(event.nameFilter!.toLowerCase());
+          final matchesMinPrice =
+              event.minPrice == null || product.price >= event.minPrice!;
+          final matchesMaxPrice =
+              event.maxPrice == null || product.price <= event.maxPrice!;
+          return matchesName && matchesMinPrice && matchesMaxPrice;
+        }).toList();
+        emit(
+          GetProductsLoadedState(
+            productsModel: ProductsModel(
+              products: filteredProducts,
+              total: filteredProducts.length,
+              skip: 0,
+              limit: 0,
             ),
           ),
         );

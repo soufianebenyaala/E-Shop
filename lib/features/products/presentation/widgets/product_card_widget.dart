@@ -4,8 +4,10 @@ import 'package:e_shop/core/Routes/app_route.dart';
 import 'package:e_shop/core/constants/contants.dart';
 import 'package:e_shop/core/widgets/new_product_widget.dart';
 import 'package:e_shop/core/widgets/vente_flash_and_discount_percentage_widget.dart';
+import 'package:e_shop/features/cart/presentation/blocs/cart/cart_bloc.dart';
 import 'package:e_shop/features/products/data/models/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 
 class ProductCardWidget extends StatelessWidget {
@@ -17,9 +19,6 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Determine if the product is new
-    bool isNew = product.meta != null &&
-        DateTime.now().difference(product.meta!.createdAt).inDays <= 3;
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(
@@ -36,7 +35,7 @@ class ProductCardWidget extends StatelessWidget {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
                     color:
                         Theme.of(context).colorScheme.surfaceContainerHighest,
                   ),
@@ -73,12 +72,12 @@ class ProductCardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    product.title ?? '',
+                    product.title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    '${product.price ?? 0} TND',
+                    '${product.price} TND',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   StarRating(
@@ -88,6 +87,27 @@ class ProductCardWidget extends StatelessWidget {
                     rating: product.rating,
                     allowHalfRating: true,
                   ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: FilledButton.tonal(
+                          style: FilledButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          onPressed: () {
+                            BlocProvider.of<CartBloc>(context).add(
+                              SaveProductToCartEvent(
+                                productModel: product,
+                              ),
+                            );
+                          },
+                          child: Text('Buy'),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

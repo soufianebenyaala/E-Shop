@@ -1,6 +1,7 @@
 import 'package:e_shop/core/error/server_exception.dart';
 import 'package:e_shop/features/auth/domain/usecase/login_use_case.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hive/hive.dart';
 
 abstract class AuthRemoteDataSource {
   Future<UserCredential> login({
@@ -49,6 +50,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<bool> logout() async {
     try {
+      await Hive.deleteFromDisk();
       await firebaseAuthInstance.signOut();
       return true;
     } on FirebaseAuthException {

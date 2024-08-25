@@ -3,6 +3,7 @@ import 'package:e_shop/core/theme/app_theme.dart';
 import 'package:e_shop/features/auth/presentation/blocs/bloc/auth_bloc.dart';
 import 'package:e_shop/features/auth/presentation/screens/auth_wrapper.dart';
 import 'package:e_shop/features/auth/presentation/screens/login_screen.dart';
+import 'package:e_shop/features/cart/presentation/blocs/cart/cart_bloc.dart';
 import 'package:e_shop/features/products/presentation/blocs/bloc/products_bloc.dart';
 import 'package:e_shop/features/splash_screen.dart';
 import 'package:e_shop/injection_container.dart';
@@ -30,6 +31,9 @@ class EShop extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => di.get<AuthBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => di.get<CartBloc>(),
         ),
         BlocProvider(
           create: (context) => di.get<ProductsBloc>()..add(GetProductsEvent()),

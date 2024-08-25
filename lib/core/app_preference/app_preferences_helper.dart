@@ -1,3 +1,5 @@
+import 'package:e_shop/features/cart/data/models/cart_model.dart';
+
 abstract class AppPreferencesHelper {
   /// App Mode
   String getIsDarkModeEnabled();
@@ -15,7 +17,7 @@ abstract class AppPreferencesHelper {
   String getToken();
   setToken(String accessToken);
 
-  /// isLoggedIn
-  bool isLoggedIn();
-  setLoggedIn(bool isLoggedIn);
+  /// Cart
+  CartModel? getCart();
+  setCart(CartModel? cart);
 }

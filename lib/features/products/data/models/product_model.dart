@@ -1,16 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:e_shop/features/cart/data/models/cart_product_model.dart';
 import 'package:e_shop/features/products/data/models/dimensions_model.dart';
 import 'package:e_shop/features/products/data/models/meta_model.dart';
 import 'package:e_shop/features/products/data/models/review_model.dart';
 
 class ProductModel {
   int id;
-  String? title;
+  String title;
   String? description;
   String? category;
-  double? price;
+  double price;
   double? discountPercentage;
   double rating;
   int stock;
@@ -31,10 +32,10 @@ class ProductModel {
 
   ProductModel({
     required this.id,
-    this.title,
+    required this.title,
     this.description,
     this.category,
-    this.price,
+    required this.price,
     this.discountPercentage,
     required this.rating,
     required this.stock,
@@ -84,11 +85,11 @@ class ProductModel {
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
       id: map['id'] as int,
-      title: map['title'] != null ? map['title'] as String : null,
+      title: map['title'] != null ? map['title'] as String : '',
       description:
           map['description'] != null ? map['description'] as String : null,
       category: map['category'] != null ? map['category'] as String : null,
-      price: map['price'] != null ? map['price'] as double : null,
+      price: map['price'] != null ? map['price'] as double : 0,
       discountPercentage: map['discountPercentage'] != null
           ? (map['discountPercentage']).toDouble() as double
           : null,
@@ -127,6 +128,22 @@ class ProductModel {
           : null,
       thumbnail: map['thumbnail'] != null ? map['thumbnail'] as String : null,
       images: map['images'] != null ? (map['images']).cast<String>() : [],
+    );
+  }
+
+  CartProductModel productModelToCartProductModel({int quantity = 1}) {
+    final total = price * quantity;
+    final discountedTotal = total * (1 - (discountPercentage ?? 0.0) / 100);
+
+    return CartProductModel(
+      id: id,
+      title: title,
+      price: price,
+      quantity: quantity,
+      total: total,
+      discountPercentage: discountPercentage ?? 0.0,
+      discountedTotal: discountedTotal,
+      thumbnail: thumbnail ?? '',
     );
   }
 }

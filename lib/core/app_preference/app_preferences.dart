@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:e_shop/core/app_preference/app_preferences_helper.dart';
 import 'package:e_shop/core/utils/enums/system_mode_enum.dart';
+import 'package:e_shop/features/cart/data/models/cart_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPreferences implements AppPreferencesHelper {
@@ -62,6 +65,25 @@ class AppPreferences implements AppPreferencesHelper {
   }
 
   @override
+  CartModel? getCart() {
+    CartModel? cart;
+    if (_sharedPreferences.getString(prefKeyCartData) != null) {
+      cart = CartModel.fromMap(
+          jsonDecode(_sharedPreferences.getString(prefKeyCartData)!));
+    }
+    return cart;
+  }
+
+  @override
+  setCart(CartModel? cart) {
+    if (cart != null) {
+      _sharedPreferences.setString(prefKeyCartData, jsonEncode(cart.toMap()));
+    } else {
+      _sharedPreferences.remove(prefKeyCartData);
+    }
+  }
+
+  @override
   bool isLoggedIn() {
     return _sharedPreferences.getBool(prefKeyIsLoggedIn) ?? false;
   }
@@ -76,4 +98,5 @@ class AppPreferences implements AppPreferencesHelper {
   static const prefKeyAppLoginPwd = "PREF_KEY_APP_LOGIN_PWD";
   static const prefKeyTokenData = "PREF_KEY_TOKEN_DATA";
   static const prefKeyIsLoggedIn = "PREF_KEY_IS_LOGGED_IN";
+  static const prefKeyCartData = "PREF_KEY_CART_DATA";
 }

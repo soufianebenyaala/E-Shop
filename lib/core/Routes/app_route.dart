@@ -1,4 +1,5 @@
 import 'package:e_shop/features/auth/presentation/screens/login_screen.dart';
+import 'package:e_shop/features/cart/presentation/screens/carts_screen.dart';
 import 'package:e_shop/features/product_details/presentation/screens/product_details_screen.dart';
 import 'package:e_shop/features/products/presentation/screens/products_screen.dart';
 import 'package:e_shop/features/splash_screen.dart';
@@ -29,6 +30,10 @@ abstract class AppRoute {
           builder: (BuildContext context) => ProductDetailsScreen(
             id: argument,
           ),
+        );
+      case AppRouteName.cartScreen:
+        return MaterialPageRoute(
+          builder: (BuildContext context) => CartScreen(),
         );
 
       default:

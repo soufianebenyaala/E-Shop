@@ -17,7 +17,6 @@ class ProductDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print((product.discountPercentage! / 100));
     return SingleChildScrollView(
       child: Column(
         children: [
