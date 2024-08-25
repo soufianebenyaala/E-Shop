@@ -1,6 +1,8 @@
+import 'package:e_shop/core/app_preference/app_preferences.dart';
 import 'package:e_shop/core/error/server_exception.dart';
 import 'package:e_shop/features/auth/domain/usecase/login_use_case.dart';
 import 'package:e_shop/features/auth/domain/usecase/sign_up_use_case.dart';
+import 'package:e_shop/injection_container.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive/hive.dart';
 
@@ -47,6 +49,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<bool> logout() async {
     try {
+      di.get<AppPreferences>().setUid(null);
       await Hive.deleteFromDisk();
       await firebaseAuthInstance.signOut();
       return true;

@@ -65,6 +65,20 @@ class AppPreferences implements AppPreferencesHelper {
   }
 
   @override
+  String getUid() {
+    return _sharedPreferences.getString(prefKeyUid) ?? '';
+  }
+
+  @override
+  setUid(String? uid) {
+    if (uid != null) {
+      _sharedPreferences.setString(prefKeyUid, uid);
+    } else {
+      _sharedPreferences.remove(prefKeyUid);
+    }
+  }
+
+  @override
   CartModel? getCart() {
     CartModel? cart;
     if (_sharedPreferences.getString(prefKeyCartData) != null) {
@@ -89,4 +103,5 @@ class AppPreferences implements AppPreferencesHelper {
   static const prefKeyTokenData = "PREF_KEY_TOKEN_DATA";
   static const prefKeyIsLoggedIn = "PREF_KEY_IS_LOGGED_IN";
   static const prefKeyCartData = "PREF_KEY_CART_DATA";
+  static const prefKeyUid = "PREF_KEY_UID";
 }

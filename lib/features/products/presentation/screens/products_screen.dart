@@ -20,75 +20,78 @@ class _ProductsScreenState extends State<ProductsScreen> {
   RangeValues _currentRangeValues = const RangeValues(0, 10000);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('E SHOP'),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              BlocProvider.of<AuthBloc>(context).add(
-                LogoutEvent(),
-              );
-              Navigator.pushNamed(
-                context,
-                AppRouteName.cartScreen,
-              );
-            },
-            icon: const Icon(
-              FontAwesomeIcons.cartShopping,
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is LogoutLoadedState) {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            AppRouteName.loginScreen,
+            (route) => false,
+          );
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('E SHOP'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  AppRouteName.cartScreen,
+                );
+              },
+              icon: const Icon(
+                FontAwesomeIcons.cartShopping,
+              ),
             ),
-          ),
-          IconButton(
-            onPressed: () async {
-              BlocProvider.of<AuthBloc>(context).add(
-                LogoutEvent(),
-              );
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                AppRouteName.loginScreen,
-                (route) => false,
-              );
-            },
-            icon: const Icon(FontAwesomeIcons.doorOpen),
-          )
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: Constants.generalHorizontalPadding,
-          vertical: Constants.generalVerticalPadding,
+            IconButton(
+              onPressed: () {
+                BlocProvider.of<AuthBloc>(context).add(
+                  LogoutEvent(),
+                );
+              },
+              icon: const Icon(FontAwesomeIcons.doorOpen),
+            )
+          ],
         ),
-        child: Column(
-          children: [
-            // Filter by Name
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GlobalTextFormFieldWidget(
-                labelText: 'Filter by Name',
-                controller: nameTEC,
-                onChanged: (_) {
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Constants.generalHorizontalPadding,
+            vertical: Constants.generalVerticalPadding,
+          ),
+          child: Column(
+            children: [
+              // Filter by Name
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GlobalTextFormFieldWidget(
+                  labelText: 'Filter by Name',
+                  controller: nameTEC,
+                  onChanged: (_) {
+                    _applyFilters();
+                  },
+                ),
+              ),
+              // Filter by Min Price
+              RangeSlider(
+                values: _currentRangeValues,
+                max: 10000,
+                divisions: 10000,
+                labels: RangeLabels(
+                  _currentRangeValues.start.round().toString(),
+                  _currentRangeValues.end.round().toString(),
+                ),
+                onChanged: (RangeValues values) {
+                  setState(() {
+                    _currentRangeValues = values;
+                  });
                   _applyFilters();
                 },
               ),
-            ),
-            // Filter by Min Price
-            RangeSlider(
-              values: _currentRangeValues,
-              max: 10000,
-              divisions: 10000,
-              labels: RangeLabels(
-                _currentRangeValues.start.round().toString(),
-                _currentRangeValues.end.round().toString(),
-              ),
-              onChanged: (RangeValues values) {
-                setState(() {
-                  _currentRangeValues = values;
-                });
-                _applyFilters();
-              },
-            ),
-            ProductsBodyWidget(applyResetFilters: _applyResetFilters),
-          ],
+              ProductsBodyWidget(applyResetFilters: _applyResetFilters),
+            ],
+          ),
         ),
       ),
     );

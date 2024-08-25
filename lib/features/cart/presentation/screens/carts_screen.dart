@@ -24,11 +24,6 @@ class CartScreen extends StatelessWidget {
                 BlocProvider.of<AuthBloc>(context).add(
                   LogoutEvent(),
                 );
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  AppRouteName.loginScreen,
-                  (route) => false,
-                );
               },
               icon: const Icon(FontAwesomeIcons.doorOpen),
             )

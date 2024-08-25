@@ -21,6 +21,10 @@ class LoginScreen extends StatelessWidget {
             di.get<AppPreferences>().setLoginEmail(state.loginParams.email);
             di.get<AppPreferences>().setLoginPwd(state.loginParams.password);
           }
+          print(state.userCredential.user?.uid);
+          di.get<AppPreferences>().setUid(state.userCredential.user?.uid);
+
+          print(di.get<AppPreferences>().getUid());
           OverlayMessageUtil.showSuccessOverlayMessage('Login successfully !');
           Navigator.pushNamedAndRemoveUntil(
             context,

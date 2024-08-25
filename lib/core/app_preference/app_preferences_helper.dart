@@ -20,4 +20,8 @@ abstract class AppPreferencesHelper {
   /// Cart
   CartModel? getCart();
   setCart(CartModel? cart);
+
+  /// Cart
+  String getUid();
+  setUid(String? cart);
 }
